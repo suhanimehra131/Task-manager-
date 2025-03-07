@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearTax WASM Clone</title>
+    <script type="module">
+        import init, { calculate_tax } from '../wasm-module/pkg/clear_tax_wasm.js';
+
+        async function run() {
+            await init();
+            document.getElementById('calculate').addEventListener('click', () => {
+                let income = parseFloat(document.getElementById('income').value);
+                let tax = calculate_tax(income);
+                document.getElementById('result').innerText = `Tax Payable: ₹${tax}`;
+            });
+        }
+        run();
+    </script>
+</head>
+<body>
+    <h1>ClearTax WASM Clone</h1>
+    <input type="number" id="income" placeholder="Enter your income" />
+    <button id="calculate">Calculate Tax</button>
+    <h2 id="result"></h2>
+</body>
+</html>
